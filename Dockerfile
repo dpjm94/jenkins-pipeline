@@ -4,7 +4,7 @@ COPY pom.xml pipeline/
 
 COPY src/ pipeline/src/
 
-WORKDIR pipeline/
+WORKDIR jenkins-pipeline/
 
 RUN mvn clean install
 
