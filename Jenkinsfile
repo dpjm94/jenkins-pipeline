@@ -21,6 +21,8 @@ node {
 
     stage('Sonar'){
         try {
+            echo 'Sonar Scanner'
+            def mvnHome = tool 'm2'
             withSonarQubeEnv{
                     
                     sh "'${mvnHome}/bin/mvn'  verify sonar:sonar -Dintegration-tests.skip=true -Dmaven.test.failure.ignore=true"
