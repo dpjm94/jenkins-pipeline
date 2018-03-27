@@ -1,6 +1,6 @@
 def CONTAINER_NAME="jenkins-pipeline"
 def CONTAINER_TAG="latest"
-def DOCKER_HUB_USER="hakdogan"
+def DOCKER_HUB_USER="dpjm94"
 def HTTP_PORT="8090"
 
 node {
@@ -21,7 +21,10 @@ node {
 
     stage('Sonar'){
         try {
-            sh "mvn sonar:sonar"
+            withSonarQubeEnv{
+                    
+                    sh "'${mvnHome}/bin/mvn'  verify sonar:sonar -Dintegration-tests.skip=true -Dmaven.test.failure.ignore=true"
+            }
         } catch(error){
             echo "The sonar server could not be reached ${error}"
         }
